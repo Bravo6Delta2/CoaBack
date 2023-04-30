@@ -1,5 +1,5 @@
 import yup from "yup"
-import { ObjectId } from 'mongodb'
+import {ObjectId} from 'mongodb'
 import mongodb from "../mongodb.js";
 
 function isDateRangeAvailable(unavailableDateRanges, startDate, endDate) {
@@ -20,8 +20,7 @@ function getNumberOfDays(startDate, endDate) {
     const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
     const start = new Date(startDate);
     const end = new Date(endDate);
-    const diff = Math.round(Math.abs((start - end) / oneDay));
-    return diff;
+    return Math.round(Math.abs((start - end) / oneDay));
 }
 
 const rent = async (req, res) => {

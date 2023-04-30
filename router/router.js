@@ -29,8 +29,7 @@ const authAdmin = (req, res, next) => {
 const authUser = async (req, res, next) => {
     const token = req.headers.token
     try {
-        let data = jwt.verify(token, secretKey)
-        res.locals.authenticated = data
+        res.locals.authenticated = jwt.verify(token, secretKey)
         next()
     }
     catch (error) {
