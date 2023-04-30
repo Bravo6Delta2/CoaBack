@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 
-let cachedDb = null;
+let cachedDb = null
+
 async function connectToDb() {
 
     if (cachedDb != null)

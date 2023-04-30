@@ -20,8 +20,8 @@ const formRegister  = yup.object({
     lastName: yup.string().required(),
     phoneNumber: yup.string().required()
 })
-const registerUser = async (req,res) => {
 
+const registerUser = async (req,res) => {
     let valid = await formRegister.isValid(req.body)
 
     if (!valid) {
@@ -31,6 +31,7 @@ const registerUser = async (req,res) => {
         res.code = 200
         return
     }
+
     let db = await mongo.connectToDb()
     try {
         let l = await  db.collection('user').find({email:req.body.email}).toArray()
@@ -96,7 +97,7 @@ const loginUser = async (req,res) => {
     let user = await db.collection('user').find({email: req.body.email, password: req.body.password}).toArray()
 
     if (user.length > 0) {
-        let token = jwt.sign({email: user[0].email, name: user[0].firstName},secretKey, {expiresIn: "4h"})
+        let token = jwt.sign({_id: user[0]._id, name: user[0].firstName},secretKey, {expiresIn: "4h"})
         res.json({
             message:"Logged in",
             token: token
