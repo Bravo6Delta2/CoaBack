@@ -20,15 +20,12 @@ function getNumberOfDays(startDate, endDate) {
     const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
     const start = new Date(startDate);
     const end = new Date(endDate);
-    return Math.round(Math.abs((start - end) / oneDay));
+            return Math.round(Math.abs((start - end) / oneDay));
 }
 
 const rent = async (req, res) => {
     const userId =  res.locals.authenticated._id
 
-    console.log(userId)
-
-    console.log(new Date())
     const form = yup.object({
         carId: yup.string().required(),
         startDate: yup.date().required(),
@@ -70,8 +67,24 @@ const rent = async (req, res) => {
     res.code = 200
 }
 
+const rentsByUserId = async (req, res) => {
+    const userId =  res.locals.authenticated._id
+
+    let db = await mongodb.connectToDb()
+    let data = await db.collection('rent').find({userId: userId}).toArray()
+
+    res.json({
+        message: "GG",
+        data: data
+    })
+    res.code = 200
+
+
+}
+
 
 
 export default {
-    rent
+    rent,
+    rentsByUserId
 }

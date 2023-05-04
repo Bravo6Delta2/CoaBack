@@ -35,7 +35,7 @@ const authUser = async (req, res, next) => {
     catch (error) {
         console.log(error)
         res.json({
-            message: "Invalid Admin Credentials"
+            message: "Invalid User Credentials"
         })
         res.code = 200
     }
@@ -69,6 +69,9 @@ router.route('/rent')
 
 router.route('/admin/earned/:id')
     .get(admin.getEarnedById)
+
+router.route('/rent')
+    .get(authUser,rent.rentsByUserId)
 
 
 
