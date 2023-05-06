@@ -2,6 +2,7 @@ import mongo from "../mongodb.js"
 import yup from "yup"
 import jwt from "jsonwebtoken"
 import nodemailer from "nodemailer";
+import {ObjectId} from "mongodb";
 
 const secretKey = "AAAAAAAAA"
 const transporter = nodemailer.createTransport({
@@ -141,8 +142,24 @@ const verifyEmail = async (req,res) => {
         })
     }
 }
+
+const getUser = async (req,res) => {
+    const userId =  res.locals.authenticated._id
+
+    let db = await mongo.connectToDb()
+    let data = await db.collection('user').find({_id: new ObjectId(userId)}).project({_id:0, firstName: 1, lastName:1, email:1, phoneNumber: 1}).toArray()
+    let rent = await db.collection('rent').find({userId: userId}).toArray()
+
+    res.json({
+        message: "GG",
+        data: data[0],
+        rents: rent
+    })
+}
+
 export default
 {   registerUser,
     loginUser,
-    verifyEmail
+    verifyEmail,
+    getUser
 }

@@ -73,7 +73,8 @@ router.route('/admin/earned/:id')
 router.route('/rent')
     .get(authUser,rent.rentsByUserId)
 
-
+router.route('/user')
+    .get(authUser,user.getUser)
 
 
 export default router
