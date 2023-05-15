@@ -23,7 +23,8 @@ const carForm = yup.object({
     year: yup.number().integer().positive(),
     color: yup.string().required(),
     price: yup.number().positive().required(),
-    type: yup.string().required()
+    type: yup.string().required(),
+    images: yup.array()
 })
 
 const getCarById = async (req,res) => {
@@ -51,7 +52,7 @@ const getCarById = async (req,res) => {
 }
 
 const addCar = async (req,res) => {
-
+    console.log(req.body)
     if (!await carForm.isValid(req.body)){
         res.json({
             message: "Form is not valid"

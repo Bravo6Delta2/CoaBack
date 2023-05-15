@@ -46,14 +46,17 @@ const registerUser = async (req,res) => {
 
         let token = jwt.sign(req.body,secretKey,{expiresIn: "4h"})
 
-        let link = "http://localhost:3001/verifyEmail/" + token
+        let link = "http://localhost:4200/verifyMail/" + token
 
         let info = await transporter.sendMail({
             from: "eryn.dibbert11@ethereal.email",
             to: req.body.email,
             subject: "Email Verification",
             text: link,
-            html: ""
+            html: "<div>" +
+                "<span style='font-size: x-large'>Profil mozete da aktivirate na linku: <span>" +
+                "<span style='font-size: medium'> <a href='"+link+"'>Aktivacioni link</a> </span>" +
+                "</div>"
         })
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
         res.json({
