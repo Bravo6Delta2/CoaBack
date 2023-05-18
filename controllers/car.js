@@ -23,8 +23,7 @@ const carForm = yup.object({
     year: yup.number().integer().positive(),
     color: yup.string().required(),
     price: yup.number().positive().required(),
-    type: yup.string().required(),
-    images: yup.array()
+    type: yup.string().required()
 })
 
 const getCarById = async (req,res) => {
@@ -52,7 +51,7 @@ const getCarById = async (req,res) => {
 }
 
 const addCar = async (req,res) => {
-    console.log(req.body)
+    console.log(req.file)
     if (!await carForm.isValid(req.body)){
         res.json({
             message: "Form is not valid"
@@ -60,9 +59,18 @@ const addCar = async (req,res) => {
         res.code = 200
         return
     }
-
+    let file = "images/" + req.file.originalname
     const db = await  mongo.connectToDb()
-    await db.collection('car').insertOne(req.body)
+    await db.collection('car').insertOne({
+        plateNumber: req.body.plateNumber,
+        model: req.body.model,
+        manufacturer: req.body.manufacturer,
+        year:  req.body.year,
+        color: req.body.color,
+        price: req.body.price,
+        type:  req.body.type,
+        images: [file]
+    })
 
     res.json({
         message: "Car added successfully"
