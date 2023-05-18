@@ -1,0 +1,8 @@
+_id,color,images,manufacturer,model,plateNumber,price,type,year
+64416a89b62e9472058b54c5,black,"[""images/a6.jpg"",""images/00.jpg"",""images/a6.jpg""]",Audi,A6,NKAA234,52,saloon,2015
+644e7c2290920f0f3d0e4d90,black,"[""images/00.jpg""]",Audi,A3,NKAA134,46,hatchback,2016
+644e7c9890920f0f3d0e4d91,black,"[""images/mercedes.jpg""]",Mercedes-Benz,C 220d,NKAD134,41,sedan,2012
+644e7cda90920f0f3d0e4d92,blue,"[""images/140409972.jpg""]",Ford,Focus,PGAD134,40,sedan,2014
+644e7d9690920f0f3d0e4d93,blue,"[""images/mondeo.webp""]",Ford,Mondeo,PGBD124,45,sedan,2014
+64628f65892aae8f098263ee,back,"[""images/2018_Audi_A7_S_Line_40_TDi_S-A_2.0.jpg""]",Audi,A7,NKAA990,56,cope,2017
+64647d99a3ff5b6d0d35db56,black,"[""images/2018_Audi_A7_S_Line_40_TDi_S-A_2.0.jpg""]",Audi,A7,NKDD345,55,coupe,2014
