@@ -19,7 +19,7 @@ const formRegister  = yup.object({
     password: yup.string().length(64).required(),
     firstName: yup.string().required(),
     lastName: yup.string().required(),
-    phoneNumber: yup.string().required()
+    phoneNumber: yup.string().required(),
 })
 
 const registerUser = async (req,res) => {

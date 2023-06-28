@@ -3,6 +3,7 @@ import user from '../controllers/user.js';
 import admin from "../controllers/admin.js";
 import car from '../controllers/car.js'
 import rent from "../controllers/rent.js";
+import stocks from "../controllers/stocks.js";
 import jwt from "jsonwebtoken";
 import multer from 'multer'
 
@@ -86,6 +87,15 @@ router.route('/rent')
 
 router.route('/user')
     .get(authUser,user.getUser)
+
+router.route('/buy')
+    .post(authUser,stocks.buy)
+
+router.route('/sell')
+    .post(authUser,stocks.sell)
+
+router.route('/portfolio')
+    .get(authUser,stocks.portfolio)
 
 
 export default router
