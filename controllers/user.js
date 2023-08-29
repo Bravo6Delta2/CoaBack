@@ -160,9 +160,32 @@ const getUser = async (req,res) => {
     })
 }
 
+const registerUser1 = async (req,res) => {
+    let valid = await formRegister.isValid(req.body)
+
+    if (!valid) {
+        res.json({
+            message: "Form is not valid"
+        })
+        res.code = 200
+        return
+    }
+
+    let db = await mongo.connectToDb()
+    await db.collection('user').insertOne(req.body)
+
+    res.json({
+        message: "User Added"
+    })
+    res.code = 200
+    return
+}
+
+
 export default
 {   registerUser,
     loginUser,
     verifyEmail,
-    getUser
+    getUser,
+    registerUser1
 }

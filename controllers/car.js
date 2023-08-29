@@ -109,7 +109,7 @@ const updateCar = async (req,res) => {
 const getAllCars = async (req,res) => {
 
     let pageNumber = req.params.page
-    let size = 16
+    let size = 6
     let offset = pageNumber > 0 ? ( ( pageNumber - 1 ) * size ) : 0
 
     let db = await mongo.connectToDb()
@@ -129,7 +129,6 @@ const getAllCars = async (req,res) => {
         }
     }
 
-
     let data = await db.collection('car').find(ff).skip(offset).limit(size).toArray()
     let next = await db.collection('car').find(ff).skip(offset+size).limit(size).toArray()
 
@@ -138,16 +137,12 @@ const getAllCars = async (req,res) => {
         let ee = new Date(req.query.end)
         let dd = []
         for (const el of data) {
-
-            console.log(el._id.toHexString())
-
             let data1 = await db.collection('rent').find({carId: el._id.toHexString()}).toArray()
 
             if (isDateRangeAvailable(data1, ss , ee)) {
                 dd.push(el._id)
             }
         }
-        console.log(dd)
         data = data.filter(item => dd.includes(item._id))
     }
 

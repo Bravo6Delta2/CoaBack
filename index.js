@@ -12,7 +12,7 @@ app.use(cors());
 app.use('/',router)
 
 app.get('/images/:image',async (req,res)=>{
-    res.sendFile("D:\\8 semestar\\Coa\\back\\images\\"+req.params.image)
+    res.sendFile("C:\\Users\\User\\WebstormProjects\\CoaBack\\images\\"+req.params.image)
     res.code = 200
 })
 

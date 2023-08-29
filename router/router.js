@@ -51,7 +51,7 @@ const authUser = async (req, res, next) => {
 
 
 router.route('/register')
-    .post(user.registerUser)
+    .post(user.registerUser1)
 
 router.route('/login')
     .post(user.loginUser)
